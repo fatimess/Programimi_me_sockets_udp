@@ -26,7 +26,7 @@ class Client
             if (string.IsNullOrWhiteSpace(cmd))
                 continue;
 
-            // UPLOAD
+          
             if (cmd.StartsWith("/upload"))
             {
                 string[] parts = cmd.Split(' ');
@@ -40,7 +40,7 @@ class Client
                 continue;
             }
 
-            // DOWNLOAD
+           
             if (cmd.StartsWith("/download"))
             {
                 string[] parts = cmd.Split(' ');
@@ -54,7 +54,7 @@ class Client
                 continue;
             }
 
-            // dërgo komandë normale
+           
             byte[] data = Encoding.UTF8.GetBytes(cmd);
             client.Send(data, data.Length, serverEP);
 
@@ -66,7 +66,7 @@ class Client
         }
     }
 
-    // ---------------- UPLOAD ----------------
+    
     static void UploadFile(UdpClient client, IPEndPoint serverEP, string filename)
     {
         if (!File.Exists(filename))
@@ -75,15 +75,15 @@ class Client
             return;
         }
 
-        // njofto serverin
+        
         byte[] cmd = Encoding.UTF8.GetBytes("/upload");
         client.Send(cmd, cmd.Length, serverEP);
 
-        // dërgo emrin
+      
         byte[] name = Encoding.UTF8.GetBytes(Path.GetFileName(filename));
         client.Send(name, name.Length, serverEP);
 
-        // dërgo file
+       
         using (FileStream fs = new FileStream(filename, FileMode.Open))
         {
             byte[] buffer = new byte[1024];
@@ -95,14 +95,14 @@ class Client
             }
         }
 
-        // EOF
+       
         byte[] eof = Encoding.UTF8.GetBytes("EOF");
         client.Send(eof, eof.Length, serverEP);
 
         Console.WriteLine("Upload u kry!");
     }
 
-    // ---------------- DOWNLOAD ----------------
+    
     static void DownloadFile(UdpClient client, IPEndPoint serverEP, string filename)
     {
         byte[] cmd = Encoding.UTF8.GetBytes($"/download {filename}");
