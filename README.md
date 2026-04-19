@@ -23,3 +23,18 @@ Ekzekuton komanda për file:
 /info <file>
 /upload (simulim)
 /download (simulim)
+
+
+Klienti
+Lidhet me serverin UDP
+Ka dy role:
+Admin → akses i plotë
+User → vetëm read
+Dërgon dhe pranon mesazhe nga serveri
+
+
+Kontributi i ekipit
+Jora Axhami– Serveri UDP
+Jona Elezi – Komandat dhe file system
+Fatime Sadiku – HTTP Server (monitorimi)
+Jona Guri – Klienti
