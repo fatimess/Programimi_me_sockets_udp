@@ -81,9 +81,9 @@ public class Commands
     private static string Search(string keyword)
     {
         var files = Directory.GetFiles(folder)
-            .Where(f => File.ReadAllText(f)
-            .Contains(keyword, StringComparison.OrdinalIgnoreCase))
-            .Select(Path.GetFileName);
+            .Select(Path.GetFileName)
+            .Where(name => name != null &&
+                           name.Contains(keyword, StringComparison.OrdinalIgnoreCase));
 
         return files.Any() ? string.Join("\n", files) : "Nuk u gjet asgje.";
     }
